@@ -27,10 +27,16 @@ void Book::setAvailability(const bool available) { this->isAvailable = available
 void Book::setBorrowerId(const string& id) { this->borrowerId = id; }
 
 // Check out
-void Book::checkOut(const string& borrowerId) {}
+void Book::checkOut(const string& borrowerId) {
+    setBorrowerId(borrowerId);
+    setAvailability(false);
+}
 
 // Return
-void Book::returnBook() {}
+void Book::returnBook() {
+    setBorrowerId("");
+    setAvailability(true);
+}
 
 // Afficher les informations d'un livre
 string Book::toString() const {
