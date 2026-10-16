@@ -15,7 +15,9 @@ $ make
 Il contient 2 fichiers `books.txt`et `users.txt` que vous pouvez utilisez pour tester votre code.
 Pour ca il suffit de donner chemin vers le repertoire data avec l'application `bibliotheque -d <chemin verrs data>`
 
-## C++
+
+# Shawn-Matthew Heng
+## C++ non ou peu vu en cours
 
 
-## Options de développement possible
+## Options de développement possible (Une autre solution technologie plus adaptée que le C++)
