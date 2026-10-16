@@ -40,15 +40,21 @@ void Book::returnBook() {
 
 // Afficher les informations d'un livre
 string Book::toString() const {
+    string disponible;
+    if(to_string(isAvailable) == "1"){
+        disponible = "Oui";
+    }else{
+        disponible = "Non";
+    }
     string info = "Titre: " + title + "\nAuteur: " + author + "\nISBN: " + isbn + 
-                    "\nDisponible: " + to_string(isAvailable);
+                    "\nDisponible: " + disponible;
     
     return info;
 }
 
 // Formater en fichier
 string Book::toFileFormat() const {
-    string fichier = title + "|" + author + "|" + isbn + "|" + to_string(isAvailable) + "|";
+    string fichier = title + "|" + author + "|" + isbn + "|" + to_string(isAvailable) + "|" + borrowerId;
 
     return fichier;
 }
@@ -60,4 +66,10 @@ void Book::fromFileFormat(const string& line) {
 
     getline(ss, title, '|');
     getline(ss, author, '|');
+    getline(ss, isbn, '|');
+
+    string availableString = to_string(isAvailable);
+    getline(ss, availableString, '|');
+
+    getline(ss, borrowerId, '|');
 }
