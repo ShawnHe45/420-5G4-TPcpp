@@ -6,11 +6,11 @@
 using namespace std;
 
 // Constructeur défaut
-Book::Book() : title(""), author(""), isbn("") {}
+Book::Book() : title(""), author(""), isbn(""), isAvailable(true), borrowerId("") {}
 
 // Constructeur avec paramètres
 Book::Book(const string& title, const string& author, const string& isbn)
-    : title(title), author(author), isbn(isbn) {}
+    : title(title), author(author), isbn(isbn), isAvailable(true), borrowerId("") {}
 
 // Getters
 string Book::getTitle() const { return title; }
