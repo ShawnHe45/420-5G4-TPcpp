@@ -46,15 +46,21 @@ string Book::toString() const {
     }else{
         disponible = "Non";
     }
+    string borrower;
+    if(borrowerId == ""){
+        borrower = "Aucun";
+    }else{
+        borrower = borrowerId;
+    }
     string info = "Titre: " + title + "\nAuteur: " + author + "\nISBN: " + isbn + 
-                    "\nDisponible: " + disponible;
+                    "\nDisponible: " + disponible + "\nEmprunté par: " + borrower;
     
     return info;
 }
 
-// Formater en fichier
+// Lire les textes en format fichier
 string Book::toFileFormat() const {
-    string fichier = title + "|" + author + "|" + isbn + "|" + to_string(isAvailable) + "|" + borrowerId;
+    string fichier = title + "|" + author + "|" + isbn + "|" + to_string(getAvailability()) + "|" + borrowerId;
 
     return fichier;
 }
@@ -68,8 +74,9 @@ void Book::fromFileFormat(const string& line) {
     getline(ss, author, '|');
     getline(ss, isbn, '|');
 
-    string availableString = to_string(isAvailable);
+    string availableString;
     getline(ss, availableString, '|');
+    isAvailable = (availableString == "1");
 
     getline(ss, borrowerId, '|');
 }
