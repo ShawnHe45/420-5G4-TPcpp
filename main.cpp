@@ -236,10 +236,14 @@ int main(int argc, char* argv[]) {
             }
             
             case 12: { // Save Data
-                if (fileManager.saveLibraryData(library)) { 
+                if(dataDir.empty()){
+                    cout << "Impossible de sauvegarder avec des chemins vide.\n";
+                }else{
+                    if (fileManager.saveLibraryData(library)) { 
                     cout << "Données de la bibliothèque sauvegardées avec succès !\n";
-                } else {
+                    } else {
                     cout << "Erreur lors de la sauvegarde des données de la bibliothèque.\n";
+                    }
                 }
                 pauseForInput();
                 break;
@@ -252,10 +256,16 @@ int main(int argc, char* argv[]) {
             }
             
             case 0: // Exit
-                cout << "Sauvegarde des données avant la fermeture...\n";
-                fileManager.saveLibraryData(library);   
-                cout << "Merci d'avoir utilisé le Système de Gestion de Bibliothèque Personnelle !\n";
-                running = false;
+                if (dataDir.empty()) {
+                    cout << "Impossible de sauvegarder avec des chemins vide.\n";
+                    cout << "Merci d'avoir utilisé le Système de Gestion de Bibliothèque Personnelle !\n";
+                    running = false;
+                }else{
+                    cout << "Sauvegarde des données avant la fermeture...\n";
+                    fileManager.saveLibraryData(library);   
+                    cout << "Merci d'avoir utilisé le Système de Gestion de Bibliothèque Personnelle !\n";
+                    running = false;
+                }
                 break;
             
             default:
