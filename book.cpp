@@ -2,6 +2,8 @@
 #include <algorithm>
 
 #include "book.h"
+#include "user.h"
+#include "library.h"
 
 using namespace std;
 
@@ -46,14 +48,26 @@ string Book::toString() const {
     }else{
         disponible = "Non";
     }
-    string borrower;
-    if(borrowerId == ""){
-        borrower = "Aucun";
+    string info = "Titre: " + title + "\nAuteur: " + author + "\nISBN: " + isbn + 
+                    "\nDisponible: " + disponible;
+    
+    return info;
+}
+
+string Book::toString(const User* borrower) const {
+    string disponible;
+    string borrowerName = "Aucun";
+
+    if(to_string(isAvailable) == "1"){
+        disponible = "Oui";
     }else{
-        borrower = borrowerId;
+        disponible = "Non";
+    }
+    if(!borrowerId.empty()){
+        borrowerName = borrower ? borrower->getName() : "Utilisateur inconnu";
     }
     string info = "Titre: " + title + "\nAuteur: " + author + "\nISBN: " + isbn + 
-                    "\nDisponible: " + disponible + "\nEmprunté par: " + borrower;
+                    "\nDisponible: " + disponible + "\nEmprunté par: " + borrowerName;
     
     return info;
 }
@@ -79,4 +93,7 @@ void Book::fromFileFormat(const string& line) {
     isAvailable = (availableString == "1");
 
     getline(ss, borrowerId, '|');
+    if(!borrowerId.empty() && borrowerId.back() == '\r'){
+        borrowerId.pop_back();
+    }
 }

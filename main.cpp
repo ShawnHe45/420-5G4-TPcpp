@@ -143,8 +143,9 @@ int main(int argc, char* argv[]) {
                 } else {
                     cout << "\n=== RÉSULTATS DE RECHERCHE ===\n";
                     for (size_t i = 0; i < results.size(); ++i) {
+                        User* borrower = library.findUserById(results[i]->getBorrowerId());
                         cout << "\nRésultat " << (i + 1) << " :\n";
-                        cout << results[i]->toString() << "\n"; 
+                        cout << results[i]->toString(borrower) << "\n"; 
                         cout << "-----------------------------\n";
                     }
                 }
@@ -161,8 +162,9 @@ int main(int argc, char* argv[]) {
                 } else {
                     cout << "\n=== RÉSULTATS DE RECHERCHE ===\n";
                     for (size_t i = 0; i < results.size(); ++i) {
+                        User* borrower = library.findUserById(results[i]->getBorrowerId());
                         cout << "\nRésultat " << (i + 1) << " :\n";
-                        cout << results[i]->toString() << "\n"; 
+                        cout << results[i]->toString(borrower) << "\n"; 
                         cout << "-----------------------------\n";
                     }
                 }
