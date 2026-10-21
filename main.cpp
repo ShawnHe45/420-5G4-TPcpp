@@ -141,11 +141,15 @@ int main(int argc, char* argv[]) {
                 if (results.empty()) {
                     cout << "Aucun livre trouvé avec ce titre.\n";
                 } else {
+                    auto sortBooks = results; // Gestion des Données: Tri des résultats par titre, auteur pouur l'affichage
+                    std::sort(sortBooks.begin(), sortBooks.end(), [](const Book* a, const Book* b){
+                        return a->getAuthor() < b->getAuthor();
+                    });
                     cout << "\n=== RÉSULTATS DE RECHERCHE ===\n";
-                    for (size_t i = 0; i < results.size(); ++i) {
-                        User* borrower = library.findUserById(results[i]->getBorrowerId());
+                    for (size_t i = 0; i < sortBooks.size(); ++i) {
+                        User* borrower = library.findUserById(sortBooks[i]->getBorrowerId());
                         cout << "\nRésultat " << (i + 1) << " :\n";
-                        cout << results[i]->toString(borrower) << "\n"; 
+                        cout << sortBooks[i]->toString(borrower) << "\n"; 
                         cout << "-----------------------------\n";
                     }
                 }
@@ -160,11 +164,15 @@ int main(int argc, char* argv[]) {
                 if (results.empty()) {
                     cout << "Aucun livre trouvé de cet auteur.\n";
                 } else {
+                    auto sortBooks = results; // Gestion des Données: Tri des résultats par titre, auteur pouur l'affichage
+                    std::sort(sortBooks.begin(), sortBooks.end(), [](const Book* a, const Book* b){
+                        return a->getTitle() < b->getTitle();
+                    });
                     cout << "\n=== RÉSULTATS DE RECHERCHE ===\n";
-                    for (size_t i = 0; i < results.size(); ++i) {
-                        User* borrower = library.findUserById(results[i]->getBorrowerId());
+                    for (size_t i = 0; i < sortBooks.size(); ++i) {
+                        User* borrower = library.findUserById(sortBooks[i]->getBorrowerId());
                         cout << "\nRésultat " << (i + 1) << " :\n";
-                        cout << results[i]->toString(borrower) << "\n"; 
+                        cout << sortBooks[i]->toString(borrower) << "\n"; 
                         cout << "-----------------------------\n";
                     }
                 }
@@ -238,7 +246,7 @@ int main(int argc, char* argv[]) {
             }
             
             case 12: { // Save Data
-                if(dataDir.empty()){
+                if(dataDir.empty()){    //Corriger un bug
                     cout << "Impossible de sauvegarder avec des chemins vide.\n";
                 }else{
                     if (fileManager.saveLibraryData(library)) { 
@@ -258,7 +266,7 @@ int main(int argc, char* argv[]) {
             }
             
             case 0: // Exit
-                if (dataDir.empty()) {
+                if (dataDir.empty()) {  //Corriger un bug
                     cout << "Impossible de sauvegarder avec des chemins vide.\n";
                     cout << "Merci d'avoir utilisé le Système de Gestion de Bibliothèque Personnelle !\n";
                     running = false;

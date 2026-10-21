@@ -49,12 +49,12 @@ string Book::toString() const {
         disponible = "Non";
     }
     string info = "Titre: " + title + "\nAuteur: " + author + "\nISBN: " + isbn + 
-                    "\nDisponible: " + disponible;
+                    "\nDisponible: " + disponible + "\nEmprunté par: " + borrowerId;
     
     return info;
 }
 
-string Book::toString(const User* borrower) const {
+string Book::toString(const User* borrower) const { //Interface et Expérience Utilisateur: Afficher le nom plutôt que l'id dans l'affichage des livres
     string disponible;
     string borrowerName = "Aucun";
 
